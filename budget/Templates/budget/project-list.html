@@ -4,19 +4,20 @@
 <div class="container">
 
   <h1 style="color: #e6f4fd;">My Projects</h1>
-  <a href="{% url 'add' %}" class="btn waves-effect right modal-trigger" style="margin:-5%;margin-right:10px;background-color:#e6f4fd ;">
+  <a href="{% url 'add' %}" class="btn waves-effect right modal-trigger" style="margin:-5%;margin-right:10px;
+    border-radius:8px;background-color:#e6f4fd ;">
     <i class="material-icons left"  style="color:#4390bc">add_circle</i>
-    <span class="bold" style="color:#4390bc">Add Projects</span>
+    <span class="bold" style="color:#4390bc;">Add Projects</span>
   </a>
   <hr>
 
 
   <div class="row">
     {% for project in project_list %}
-    <div class="col s12 md6 xl3">
-      <div class="card-panel">
-        <h5>{{ project.name }}</h5>
-        <a href="{% url 'detail' project.slug %}" class="btn">Visit</a>
+    <div class="col s12 md6 xl3" style="padding-top:10px" >
+      <div class="card-panel" style="background-color:#e6f4fd;border-radius: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h5 style="margin:0px 20px 20px 0px">{{ project.name }}</h5>
+        <a href="{% url 'detail' project.slug %}" class="btn" style="background-color: #4390bc;border-radius: 5px;">Visit</a>
       </div>
     </div>
     {% empty %}

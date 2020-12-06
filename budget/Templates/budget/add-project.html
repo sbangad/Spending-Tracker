@@ -5,16 +5,21 @@
 <div class="container">
   <form action="" method="POST">
     {% csrf_token %}
-    {{ form }}
-    <label for="categoryInput"  style="color:#e6f4fd">Expense Categores (hit enter after every category)</label>
-    <input type="text" name="categoryInput" id="categoryInput">
-    <input type="hidden" name="categoriesString">
+    <div class="card" style="padding:20px;margin:150px;background-color:#e6f4fd;border-radius:10px;border-radius: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center;color:#4390bc;font-size:x-larger"><b>New Project</b></h5>
+        {{ form }}
+        <label for="categoryInput"  style="color:#4390bc;font-size:15px">Expense Categories</label>
+        <input type="text" name="categoryInput" id="categoryInput">
+        <input type="hidden" name="categoriesString">
+        
+        <ul id="categoriesContainer"></ul>
 
-    <ul id="categoriesContainer">
+        <button type="submit" class="btn" style="background-color:#4390bc;border-radius:8px;">Start Project</button>
+      </div>
+    </div>
+    
 
-    </ul>
-
-    <button type="submit" class="btn">Start Project</button>
 
   </form>
 </div>
