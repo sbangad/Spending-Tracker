@@ -1,7 +1,11 @@
 {% extends 'budget/base.html' %}
 {% block content %}
-
-<div class="container">
+<style>
+  body {
+    background-color:#10212a;
+  }
+</style>
+<div class="container" style="width: 100%;">
   <script>
     var expense = {};
     var amount = {};
@@ -40,9 +44,15 @@
     </div>
   </section>
   {% if project.budget_left != project.budget  %}
-  <div class="chart-container" style="position: relative; height:80; width:80">
-    <canvas id="myChart"></canvas>
+  <div class="row" style="width: 100%;margin-left: 0%;margin-right: 0%;">
+    <div class=" col" style="width: 50%;">
+      <canvas id="myChart" ></canvas>
+    </div>
+    <div class="chart-container col" style="width: 50%;">
+      <canvas id="myChart1"></canvas>
+    </div>
   </div>
+ 
   {% endif %}
   <section class="section section-expenses">
     <div class="row">
@@ -171,6 +181,8 @@ function deleteExpense(e){
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script>
   var ctx = document.getElementById('myChart');
+  var ctx1 = document.getElementById('myChart1');
+
   var keys = [];
   var values = [];
   for(var k in amount) expense[k] = amount[k];
@@ -192,16 +204,72 @@ function deleteExpense(e){
                   'rgba(255, 159, 64)'
               ],
               borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 111)',
+                  'rgba(255, 206, 86)',
+                  'rgba(75, 192, 192)',
+                  'rgba(153, 102, 255)',
+                  'rgba(255, 159, 64)'
               ],
               borderWidth: 1
-          }]
+          }],
+          
       },
+  });
+  var options = {
+    scales: {
+        xAxes: [{
+            gridLines: {
+              color: "rgba(0, 0, 0, 0)",
+            }
+        }],
+        yAxes: [{
+            gridLines: {
+                display:false
+            }   
+        }]
+    }
+}
+  var myChart1 = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+          labels: keys,
+          datasets: [{
+              label: 'Expense',
+              data: values,
+              backgroundColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 111)',
+                  'rgba(255, 206, 86)',
+                  'rgba(75, 192, 192)',
+                  'rgba(153, 102, 255)',
+                  'rgba(255, 159, 64)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 111)',
+                  'rgba(255, 206, 86)',
+                  'rgba(75, 192, 192)',
+                  'rgba(153, 102, 255)',
+                  'rgba(255, 159, 64)'
+              ],
+              borderWidth: 1
+          }],
+      },
+      options: {
+        scales: {
+            xAxes: [{
+              gridLines: {
+              color: "rgba(0, 0, 0, 0)",
+            }
+            }],
+            yAxes: [{
+              gridLines: {
+                color: "rgba(0, 0, 0, 0)",
+            }
+            }]
+        }
+    }
   });
   </script>
 {% endblock %}

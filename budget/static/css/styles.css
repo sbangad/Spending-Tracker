@@ -35,7 +35,7 @@ form ul li.category {
 
 /* project-details statistics*/
 .section-stats .card-panel{
-    background-color: #C0C0C0;
+    background-color: #7dc1e9;
 }
  .section-stats h1{
     font-size: 4vw;
@@ -60,7 +60,7 @@ form ul li.category {
     font-size: 16px;
     border-radius: 0;
     margin: 0;
-    background-color: #8E8A8A;
+    background-color: #7dc1e9;
 }
 
 .section-expenses .expense .category{
@@ -68,7 +68,7 @@ form ul li.category {
 }
 
 .section-expenses li:nth-child(even) .expense {
-    background-color: #C0C0C0;
+    background-color: #6e98b3;
   }
   
   .section-expenses .close-icon:hover {
