@@ -2,7 +2,7 @@
 
 html{
     font-family:'Montserrat';
-    background-color:#4390bc;
+    background-color:#10212a;
 }
 .bold{
     font-weight: bold;
@@ -28,14 +28,14 @@ html{
 /* project add view */
 form ul li.category {
     display: inline-block;
-    background-color: #C0C0C0; 
+    background-color: #e6f4fd; 
     padding: 5px 10px;
     margin-right: 5px;
   }
 
 /* project-details statistics*/
 .section-stats .card-panel{
-    background-color: #7dc1e9;
+    background-color: #e6f4fd;
 }
  .section-stats h1{
     font-size: 4vw;

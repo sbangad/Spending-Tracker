@@ -13,7 +13,12 @@
   </script>
   <section class="section section-stats">
     <div class="row">
-
+      <div class="row" style="padding-bottom: 10px;">  
+        <button class="btn waves-effect" style = "border-radius: 200px;"onclick="window.location.href='{%url 'list' %}'">
+          <i class="material-icons white-text ">reply</i>
+        </button>
+     </div>
+   
       <div class="col s12 m12 l4">
         <div class="card-panel">
           <h6 class="bold">Total Budget</h6>
@@ -55,12 +60,13 @@
  
   {% endif %}
   <section class="section section-expenses">
-    <div class="row">
-      <button class="btn waves-effect right modal-trigger" href="#expenseModal">
-        <i class="material-icons white-text left">add_circle</i>
-        Add Expense
-      </button>
+    <div class="row" style="padding-bottom: 10px;padding-top: 10px;">  
+        <button class="btn waves-effect right modal-trigger" style = "border-radius: 8px;"href="#expenseModal">
+          <i class="material-icons white-text left">add_circle</i>
+          Add Expense
+        </button>
     </div>
+   
 
     <ul class="z-depth-1">
 
@@ -235,7 +241,6 @@ function deleteExpense(e){
       data: {
           labels: keys,
           datasets: [{
-              label: 'Expense',
               data: values,
               backgroundColor: [
                   'rgba(255, 99, 132)',
@@ -261,14 +266,23 @@ function deleteExpense(e){
             xAxes: [{
               gridLines: {
               color: "rgba(0, 0, 0, 0)",
-            }
+            },
+            ticks: {
+                    fontColor: 'aliceblue'
+                },
             }],
             yAxes: [{
               gridLines: {
                 color: "rgba(0, 0, 0, 0)",
-            }
+            },
+            ticks: {
+                    fontColor: 'aliceblue'
+                },
             }]
-        }
+        },
+        legend: {
+    display:false
+  },
     }
   });
   </script>
