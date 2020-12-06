@@ -2,7 +2,11 @@
 {% block content %}
 
 <div class="container">
+  <script>
+    var expense = {};
+    var amount = {};
 
+  </script>
   <section class="section section-stats">
     <div class="row">
 
@@ -35,7 +39,11 @@
 
     </div>
   </section>
-
+  {% if project.budget_left != project.budget  %}
+  <div class="chart-container" style="position: relative; height:80; width:80">
+    <canvas id="myChart"></canvas>
+  </div>
+  {% endif %}
   <section class="section section-expenses">
     <div class="row">
       <button class="btn waves-effect right modal-trigger" href="#expenseModal">
@@ -62,8 +70,27 @@
             <div class="col 1">
               <span class="title bold">{{ expense.category.name }}</span>
             </div>
+            <script>
+                if(amount["{{expense.category.name}}"])
+                {
+                  var oldval = parseFloat(amount["{{expense.category.name}}"])
+                }
+                else
+                {
+                  var oldval = 0
+                }
+                var addKey = '{{expense.category.name}}';
+                var addVal = parseFloat("{{expense.amount}}");
+                var final = oldval + addVal
 
-            <a class="close-icon" onclick="deleteExpense(this)" data-id="{{ expense.id }}">
+                amount[addKey] = final
+                
+                
+                function refreshPage(){
+                  window.location.reload();
+                }
+            </script>
+            <a class="close-icon" onclick="deleteExpense(this);refreshPage();" data-id="{{ expense.id }}">
               <i class="material-icons red-text right">close</i>
             </a>
 
@@ -78,32 +105,47 @@
 </div>
 
 <div id="expenseModal" class="modal">
+  <script>
+    var list = [];
+ </script>
   <div class="modal-content">
     <h4>Add Expense</h4>
 
-    <form method="POST">
+    <form method="POST" id="myFormId">
       {% csrf_token %}
       <label for="title">Title</label>
       <input name="title" id="title">
 
       <label for="amount">Amount</label>
       <input name="amount" id="amount">
-
+      
       <select name="category">
         {% for category in category_list %}
+        <script>
+          list.push('{{category.name}}')
+          var newKey = '{{category.name}}';
+          var newVal = 0;
+          expense[newKey] = newVal;
+        </script>
           <option>{{ category.name }}</option>
         {% endfor %}
       </select>
-
       <button type="submit" class="btn">Add</button>
     </form>
+    <script>
+      var queryString = $('#myFormId').serialize();
+      console.log(queryString)
 
+    </script>
   </div>
+
 </div>
 
 <script>
 var elem = document.querySelector('.modal')
 var instance = M.Modal.init(elem)
+console.log(expense)
+console.log(amount)
 
 var elem = document.querySelector('select')
 var instance = M.FormSelect.init(elem)
@@ -126,5 +168,40 @@ function deleteExpense(e){
   })
 }
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script>
+  var ctx = document.getElementById('myChart');
+  var keys = [];
+  var values = [];
+  for(var k in amount) expense[k] = amount[k];
+  for(var k in expense) keys.push(k);
+  for(var k in expense) values.push(expense[k]);
+  var myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+          labels: keys,
+          datasets: [{
+              label: '# of Votes',
+              data: values,
+              backgroundColor: [
+                  'rgba(255, 99, 132)',
+                  'rgba(54, 162, 111)',
+                  'rgba(255, 206, 86)',
+                  'rgba(75, 192, 192)',
+                  'rgba(153, 102, 255)',
+                  'rgba(255, 159, 64)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+  });
+  </script>
 {% endblock %}
